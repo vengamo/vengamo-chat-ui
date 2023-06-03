@@ -20,13 +20,9 @@ Vengamo Chat UI is a Flutter project that provides a user interface for a chat a
 1. Ensure that you have Flutter installed on your system. For installation instructions, refer to the [Flutter official documentation](https://flutter.dev/docs/get-started/install).
 
 2. Clone this repository to your local machine:
-
    ```bash
    git clone https://github.com/vengamo/vengamo-chat-ui.git
    
-3.Change to the project directory
-
+3.Change to the project directory:
   ```bash
   cd vengamo-chat-ui
- 
-
