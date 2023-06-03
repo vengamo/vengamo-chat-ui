@@ -29,8 +29,4 @@ Vengamo Chat UI is a Flutter project that provides a user interface for a chat a
   ```bash
   cd vengamo-chat-ui
  
-4. Fetch the project dependencies:
-  ```bash
- flutter pub get
- 
 
