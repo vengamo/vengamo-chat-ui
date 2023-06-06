@@ -1,7 +1,7 @@
 # Vengamo Chat UI (WhatsApp, Telegram, FB Messanger Chat UI) in One Place
 
 
-![VengamoChatUI](https://github.com/vengamo/vengamo-chat-ui/assets/133201077/b290163a-dd84-487a-ba9f-bfd362bdd0f5)
+![VengamoChatUI (1) (1)](https://github.com/vengamo/vengamo-chat-ui/assets/133201077/6879da01-a05d-4907-af88-f8033801d527)
 
 Vengamo Chat UI is a Flutter project that provides a user interface for a chat application. It offers a sleek and modern design, allowing users to engage in conversations and view chat messages in an intuitive way.
 
