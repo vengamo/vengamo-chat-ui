@@ -12,7 +12,7 @@ Vengamo Chat UI is a Flutter project that provides a user interface for a chat a
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot1.png)
+![Simulator Screenshot - iPhone 13 - 2023-06-03 at 19 14 05](https://github.com/vengamo/vengamo-chat-ui/assets/133201077/864b8e91-e73e-4a5f-ac9f-8831bff9b587)
 ![Screenshot 2](screenshots/screenshot2.png)
 
 ## Installation
