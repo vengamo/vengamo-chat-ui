@@ -25,7 +25,7 @@ Vengamo Chat UI is a Flutter project that provides a user interface for a chat a
    ```
    
 3.Change to the project directory:
-    ```js
+    ```
     cd vengamo-chat-ui
     ```
 
