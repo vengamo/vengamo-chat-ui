@@ -30,15 +30,38 @@ Vengamo Chat UI is a Flutter project that provides a user interface for a chat a
     ```
 
 4.Fetch the project dependencies:
-    ```bash
+    ```
     flutter pub get
     ```
 
 5.Run the app on a connected device or emulator:
-    ```bash
+    ```
     flutter pub get
     ```
 
 This will start the Vengamo Chat UI app on your device.
 
 ## Customization
+
+```js
+const { Client } = require('whatsapp-web.js');
+
+const client = new Client();
+
+client.on('qr', (qr) => {
+    // Generate and scan this code with your phone
+    console.log('QR RECEIVED', qr);
+});
+
+client.on('ready', () => {
+    console.log('Client is ready!');
+});
+
+client.on('message', msg => {
+    if (msg.body == '!ping') {
+        msg.reply('pong');
+    }
+});
+
+client.initialize();
+```
