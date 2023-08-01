@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vengamo_chat_ui/vengamo_chat_ui.dart';
+import 'package:vengamo_chat_ui/theme/app_color.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,109 +9,323 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'James Wagon',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const VengamoChatScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class VengamoChatScreen extends StatelessWidget {
+  const VengamoChatScreen({super.key});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  String getTime() {
+    int hour = DateTime.now().hour;
+    int min = DateTime.now().minute;
+    String hRes = hour <= 9 ? '0$hour' : hour.toString();
+    String mRes = min <= 9 ? '0$min' : min.toString();
+    return '$hRes:$mRes';
   }
+
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('James Wagon'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+              color: AppColors.backgroundColor,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+ 
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 2),
+            child: Column(
+              children: [
+
+              VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              isNextMessageFromSameSender: false,
+              time: getTime(),
+              isAudio: true,
+              audioSource: 'http://www.uscis.gov/files/nativedocuments/Track%2093.mp3',
+              timeLabelColor: AppColors.iconColor,
+              pointer: true,
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
             ),
-          ],
+            const SizedBox(height: 10,),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: false,
+              isNextMessageFromSameSender: false,
+              time: getTime(),
+              isAudio: true,
+              audioSource: 'https://p.scdn.co/mp3-preview/c2bca95698cc381f0a1a9111095156d15ebd4698',
+              timeLabelColor: AppColors.iconColor,
+              pointer: true,
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+            // const SizedBox(height: 10,),
+            //     VengamoChatUI(
+            //   senderBgColor: AppColors.softGreenColor,
+            //   receiverBgColor: AppColors.white,
+            //   timeLabelColor: AppColors.darkModeBackgroundColor,
+            //   isSender: false,
+            //   isNextMessageFromSameSender: false,
+            //   imgUrl : 'https://static.wikia.nocookie.net/frstarwars/images/4/43/TheChild-Fathead.png/revision/latest?cb=20201101090715',
+            //   caption : "check this out! Why don't skeletons fight each other? They don't have the guts!",
+            //   time: getTime(),
+            //   pointer: true, 
+            //   ack: Image.asset(
+            //     'assets/images/seen.png',
+            //     height: 12,
+            //     width: 12,
+            //   ),
+            // ),
+            const SizedBox(height: 10,),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: false,
+              timeLabelColor: AppColors.white,
+              isNextMessageFromSameSender: false,
+              imgUrl : 'https://cdn.wallpapersafari.com/28/2/vrIzJD.jpg',
+              time: getTime(),
+              pointer: true, 
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+            const SizedBox(height: 10,),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: false,
+              timeLabelColor: AppColors.white,
+              isNextMessageFromSameSender: false,
+              imgUrl : 'https://weellu.s3.us-east-2.amazonaws.com/test/kYFhiApyyVRX.jpeg',
+              time: getTime(),
+              pointer: true, 
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+               VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              isNextMessageFromSameSender: false,
+              time: getTime(),
+              timeLabelColor : AppColors.softBlackcolor,
+              text: "Yolla ✋ Hey, guess what?",
+              pointer: true, 
+              ack: const Icon(
+                      Icons.check,
+                      color: AppColors.iconColor, // You can customize the color here
+                    size: 13, // You can customize the size here
+              ),
+            ),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              isNextMessageFromSameSender: true,
+              time: getTime(),
+              timeLabelColor : AppColors.softBlackcolor,
+              text: "What?",
+              pointer: false, 
+              ack: Image.asset(
+                'assets/images/double_tick_grey.png',
+                height: 13,
+                width: 13,
+              ),
+            ),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: false,
+              isNextMessageFromSameSender: false,
+              time: getTime(),
+              text: "I invented a new word!.",
+              pointer: true, 
+              ack: Image.asset(
+                'assets/images/double_tick_green.png',
+                height: 14,
+                width: 15,
+              ),
+            ),
+            const SizedBox(height: 5,),
+
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              timeLabelColor: AppColors.darkModeBackgroundColor,
+              isSender: true,
+              isNextMessageFromSameSender: false,
+              imgUrl : 'https://wallpaperaccess.com/full/1248267.jpg',
+              caption: "Why did the sun never want to join the galaxy's talent show? Because it didn't want to be a star performer, it preferred to shine solo",
+              time: getTime(),
+              pointer: true, 
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: false,
+              isNextMessageFromSameSender: true,
+              time: getTime(),
+              text: "Hold on, a sec, let me pick this call?",
+              pointer: false, 
+              ack: Image.asset(
+                'assets/images/double_tick_green.png',
+                height: 14,
+                width: 15,
+              ),
+            ),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: false,
+              isNextMessageFromSameSender: true,
+              time: getTime(),
+              text: "Plagiarism! 💫 😂 ",
+              pointer: false, 
+              ack: Image.asset(
+                'assets/images/double_tick_green.png',
+                height: 14,
+                width: 15,
+              ),
+            ),
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              isNextMessageFromSameSender: false,
+              time: getTime(),
+              text: "Plagiarism!? 😂.",
+              pointer: true, 
+              ack: Image.asset(
+                'assets/images/sent.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+           
+             VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              isNextMessageFromSameSender: true,
+              time: getTime(),
+              text: "Thanks! I thought you'd like it 🤪",
+              pointer: false, 
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ), VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              isNextMessageFromSameSender: true,
+              time: getTime(),
+              text: "Why don't scientists trust atoms? Because they make up everything! If you'd like to hear more jokes or have any other questions, feel free to ask.😂🤪",
+              pointer: false, 
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+        
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: false,
+              isNextMessageFromSameSender: false,
+              time: getTime(),
+              text: "check this out! Why don't skeletons fight each other? They don't have the guts!",
+              pointer: true, 
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+            
+            const SizedBox(height: 5,),
+
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              isNextMessageFromSameSender: false,
+              imgUrl : 'https://cache.marieclaire.fr/data/photo/w1000_ci/1ju/sean-connery-james-bond.jpg',
+              caption: "Why did the sun never want to join the galaxy's talent show? Because it didn't want to be a star performer, it preferred to shine solo",
+              time: getTime(),
+              pointer: true, 
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+
+            VengamoChatUI(
+              senderBgColor: AppColors.softGreenColor,
+              receiverBgColor: AppColors.white,
+              isSender: true,
+              caption: "You'd like it 🤪",
+              isNextMessageFromSameSender: false,
+              imgUrl : 'https://wallpapers.com/images/high/peaceful-relaxing-vhbesnvs3ylhpuvk.webp',
+              time: getTime(),
+              timeLabelColor: AppColors.iconColor,
+              pointer: false,
+              ack: Image.asset(
+                'assets/images/seen.png',
+                height: 12,
+                width: 12,
+              ),
+            ),
+
+           
+        
+              ],
+            ),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ), // Use Vengamo Chat UI component here
     );
   }
 }
